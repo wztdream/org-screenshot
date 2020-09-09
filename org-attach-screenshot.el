@@ -123,22 +123,15 @@ the links being already placed inside the text."
 			       (org-attach-screenshot-get-attach-dir))
 			      filename))
 	 (arglst (split-string org-attach-screenshot-command-line " "))
-	 (cmd (car arglst))
-	 linkfilename status)
+	 (cmd (car arglst)) status)
     (assert (executable-find cmd) nil
 	    "Cannot find executable '%s'. Please check org-attach-screenshot-command-line"
 	    cmd)
-    (if org-attach-screenshot-relative-links
-	(setq linkfilename
-	      (file-relative-name
-	       scrfilename (file-name-directory
-			    (or (buffer-file-name) default-directory))))
-      (setq linkfilename scrfilename))
     (if (and (file-exists-p scrfilename)
 	     (not (y-or-n-p (format "%s already exists. Overwrite?"
 				    scrfilename))))
 	(call-interactively 'org-attach-screenshot)
-      (insert (concat "[[file:" linkfilename "]]"))
+      (insert (concat "[[attachment:" filename "]]"))
       (unless prfx (make-frame-invisible nil t))
       ;; we must canoncicalize the file name when we hand it
       ;; by call-process to the import command
