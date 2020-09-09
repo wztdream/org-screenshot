@@ -41,7 +41,6 @@
 ;;   (require 'org-attach-screenshot)
 
 ;;; Code:
-
 (require 'org-attach)
 
 ;; save-mark-and-excursion in Emacs 25 works like save-excursion did before
@@ -117,7 +116,7 @@ the links being already placed inside the text."
 			defval))))
   (unless (file-name-extension filename)
     (setq filename (concat filename ".png")))
-  (assert (derived-mode-p 'org-mode) nil
+  (cl-assert (derived-mode-p 'org-mode) nil
 	  "you must be in org mode to take a screenshot")
   (let* ((scrfilename (concat (file-name-as-directory
 			       (org-attach-screenshot-get-attach-dir))
