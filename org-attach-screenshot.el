@@ -123,7 +123,7 @@ the links being already placed inside the text."
 			      filename))
 	 (arglst (split-string org-attach-screenshot-command-line " "))
 	 (cmd (car arglst)) status)
-    (assert (executable-find cmd) nil
+    (cl-assert (executable-find cmd) nil
 	    "Cannot find executable '%s'. Please check org-attach-screenshot-command-line"
 	    cmd)
     (if (and (file-exists-p scrfilename)
